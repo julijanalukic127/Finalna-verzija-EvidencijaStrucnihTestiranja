@@ -1,0 +1,75 @@
+﻿@{
+    string? uloga = Context.Session.GetString("Uloga");
+}
+@{
+    ViewData["Title"] = "Početna";
+}
+
+<div class="home-hero text-center">
+    <h1>Evidencija stručnih testiranja</h1>
+
+    <p>
+        Sistem za upravljanje zaposlenima i evidenciju stručnih testiranja.
+    </p>
+</div>
+
+<div class="row mt-5 g-4">
+    @if (uloga == "Admin")
+{
+    <div class="col-md-4">
+        <div class="card home-card h-100">
+            <div class="card-body">
+                <h3>Zaposleni</h3>
+
+                <p>
+                    Pregled, unos, izmena i brisanje podataka o zaposlenima.
+                </p>
+
+                <a asp-controller="Zaposleni"
+                   asp-action="Index"
+                   class="btn btn-primary">
+                    Otvori zaposlene
+                </a>
+            </div>
+        </div>
+    </div>
+    }
+    <div class="col-md-4">
+        <div class="card home-card h-100">
+            <div class="card-body">
+                <h3>Testiranja</h3>
+
+                <p>
+                    Evidencija sprovedenih stručnih testiranja zaposlenih.
+                </p>
+
+                <a asp-controller="Testiranje"
+                   asp-action="Index"
+                   class="btn btn-warning">
+                    Testiranja
+                </a>
+            </div>
+        </div>
+    </div>
+@if (uloga == "Admin")
+    {
+        <div class="col-md-4">
+            <div class="card home-card h-100">
+                <div class="card-body">
+                    <h3>Vrste testova</h3>
+
+                    <p>
+                        Pregled i upravljanje vrstama stručnih testova.
+                    </p>
+
+                    <a asp-controller="VrstaTesta"
+                    asp-action="Index"
+                    class="btn btn-warning">
+                        Vrste testova
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+        </div>
+   

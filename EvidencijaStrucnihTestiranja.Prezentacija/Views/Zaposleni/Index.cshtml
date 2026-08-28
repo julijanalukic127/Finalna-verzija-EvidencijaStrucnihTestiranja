@@ -1,0 +1,88 @@
+﻿@model List<EvidencijaStrucnihTestiranja_Sloj_Podataka.Klase_Podataka.Zaposleni>
+
+@{
+    ViewData["Title"] = "Zaposleni";
+}
+
+@if (TempData["Greska"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Greska"]
+    </div>
+}
+
+@if (TempData["Uspeh"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Uspeh"]
+    </div>
+}
+<h1>Evidencija zaposlenih</h1>
+<p>
+    <a asp-controller="Zaposleni"
+       asp-action="Dodaj"
+       class="btn btn-primary">
+        Dodaj zaposlenog
+    </a>
+</p>
+<form asp-controller="Zaposleni" asp-action="Index" method="get" class="mb-3">
+    <div class="input-group">
+        <input type="text"
+               name="pretraga"
+               value="@ViewBag.Pretraga"
+               class="form-control"
+               placeholder="Pretraži po imenu, prezimenu ili JMBG-u..." />
+
+        <button type="submit" class="btn btn-primary">
+            Pretraži
+        </button>
+
+        <a asp-controller="Zaposleni"
+           asp-action="Index"
+           class="btn btn-secondary">
+            Prikaži sve
+        </a>
+    </div>
+</form>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>JMBG</th>
+            <th>Ime</th>
+            <th>Prezime</th>
+            <th>Radno mesto</th>
+            <th>Email</th>
+            <th>Akcije</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var zaposleni in Model)
+        {
+            <tr>
+                <td>@zaposleni.JMBG</td>
+                <td>@zaposleni.Ime</td>
+                <td>@zaposleni.Prezime</td>
+                <td>@zaposleni.RadnoMesto</td>
+                <td>@zaposleni.Email</td>
+                
+                <td>
+                    <a asp-controller="Zaposleni"
+                       asp-action="Izmeni"
+                       asp-route-jmbg="@zaposleni.JMBG"
+                       class="btn btn-warning btn-sm">
+                        Izmeni
+                    </a>
+
+                    <a asp-controller="Zaposleni"
+                       asp-action="Obrisi"
+                       asp-route-jmbg="@zaposleni.JMBG"
+                       class="btn btn-danger btn-sm">
+                        Obriši
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

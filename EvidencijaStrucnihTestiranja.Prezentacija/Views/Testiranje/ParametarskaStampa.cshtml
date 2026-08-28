@@ -1,0 +1,80 @@
+﻿@model IEnumerable<EvidencijaStrucnihTestiranja_Sloj_Podataka.Klase_Podataka.Testiranje>
+
+@{
+    ViewData["Title"] = "Parametarska štampa";
+}
+
+<h1>Parametarska štampa testiranja</h1>
+
+<form asp-controller="Testiranje"
+      asp-action="ParametarskaStampa"
+      method="get"
+      class="mb-4">
+
+    <div class="mb-3">
+        <label class="form-label">Izaberite zaposlenog</label>
+
+        <select name="jmbg" class="form-control">
+            <option value="">-- Izaberite zaposlenog --</option>
+
+            @foreach (var zaposleni in ViewBag.Zaposleni)
+            {
+                if (ViewBag.IzabraniJMBG == zaposleni.JMBG)
+                {
+                    <option value="@zaposleni.JMBG" selected>
+                        @zaposleni.Ime @zaposleni.Prezime (@zaposleni.JMBG)
+                    </option>
+                }
+                else
+                {
+                    <option value="@zaposleni.JMBG">
+                        @zaposleni.Ime @zaposleni.Prezime (@zaposleni.JMBG)
+                    </option>
+                }
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Prikaži
+    </button>
+</form>
+
+@if (!string.IsNullOrWhiteSpace(ViewBag.IzabraniJMBG))
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>JMBG</th>
+                <th>Vrsta testa</th>
+                <th>Datum testiranja</th>
+                <th>Broj poena</th>
+                <th>Rezultat</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var testiranje in Model)
+            {
+                <tr>
+                    <td>@testiranje.JMBG</td>
+                    <td>@testiranje.NazivVrsteTesta</td>
+                    <td>@testiranje.DatumTestiranja.ToShortDateString()</td>
+                    <td>@testiranje.BrojPoena</td>
+                    <td>@(testiranje.Polozio ? "Položio" : "Nije položio")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <button class="btn btn-primary"
+            onclick="window.print()">
+        Štampaj
+    </button>
+}
+
+<a asp-controller="Testiranje"
+   asp-action="Index"
+   class="btn btn-secondary">
+    Nazad
+</a>

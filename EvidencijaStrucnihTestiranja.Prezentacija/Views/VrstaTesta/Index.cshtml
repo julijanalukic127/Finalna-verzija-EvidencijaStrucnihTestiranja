@@ -1,0 +1,63 @@
+﻿@model List<EvidencijaStrucnihTestiranja_Sloj_Podataka.Klase_Podataka.VrstaTesta>
+
+@{
+    ViewData["Title"] = "Vrste testova";
+}
+@if (TempData["Greska"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Greska"]
+    </div>
+}
+
+@if (TempData["Uspeh"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Uspeh"]
+    </div>
+}
+<h1>Vrste testova</h1>
+
+<a asp-controller="VrstaTesta"
+   asp-action="Dodaj"
+   class="btn btn-primary mb-3">
+    Dodaj vrstu testa
+</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Naziv</th>
+            <th>Minimalan broj poena</th>
+            <th>Akcije</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var vrsta in Model)
+        {
+            <tr>
+                <td>@vrsta.IDVrsteTesta</td>
+                <td>@vrsta.Naziv</td>
+                <td>@vrsta.MinimalanBrojPoena</td>
+
+                <td>
+                    <a asp-controller="VrstaTesta"
+                       asp-action="Izmeni"
+                       asp-route-id="@vrsta.IDVrsteTesta"
+                       class="btn btn-warning btn-sm">
+                        Izmeni
+                    </a>
+
+                    <a asp-controller="VrstaTesta"
+                       asp-action="Obrisi"
+                       asp-route-id="@vrsta.IDVrsteTesta"
+                       class="btn btn-danger btn-sm">
+                        Obriši
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

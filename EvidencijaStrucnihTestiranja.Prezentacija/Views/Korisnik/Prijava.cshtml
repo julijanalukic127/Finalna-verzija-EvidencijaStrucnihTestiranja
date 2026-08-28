@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Prijava";
+}
+
+<h1>Prijava</h1>
+
+@if (ViewBag.Greska != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Greska
+    </div>
+}
+
+<form asp-controller="Korisnik"
+      asp-action="Prijava"
+      method="post">
+
+    <div class="mb-3">
+        <label class="form-label">Korisničko ime</label>
+        <input type="text"
+               name="korisnickoIme"
+               class="form-control"
+               required />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Šifra</label>
+        <input type="password"
+               name="sifra"
+               class="form-control"
+               required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Prijavi se
+    </button>
+
+</form>
