@@ -1,7 +1,7 @@
 /*
     Evidencija stručnih testiranja
     SQL skripta za kreiranje baze, tabela, relacija,
-    stored procedure, pogleda i početnog admin korisnika.
+    stored procedure, pogleda i početnih korisnika.
 */
 
 IF DB_ID(N'EvidencijaStrucnihTestiranja') IS NULL
